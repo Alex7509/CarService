@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CarService2.DL\CarService2.DL.csproj" />
+    <ProjectReference Include="..\CarService2.Models\CarService3.Models.csproj" />
   </ItemGroup>
 
 </Project>
