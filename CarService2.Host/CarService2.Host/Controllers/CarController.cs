@@ -35,8 +35,7 @@ namespace CarService3.Host.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetCarsById(Guid id)
         {
-          
-
+         
             var car =
                 _carService.GetById(id);
 

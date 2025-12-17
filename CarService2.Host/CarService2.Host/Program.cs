@@ -1,7 +1,10 @@
 using CarService3.BL;
 using CarService3.DL;
 using CarService3.DL.Interfaces;
+using Mapster;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace CarService3.Host
 {
@@ -9,12 +12,23 @@ namespace CarService3.Host
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
+
+            Log.Logger = new LoggerConfiguration()
+           .ReadFrom.Configuration(builder.Configuration)
+           .Enrich.FromLogContext()
+           .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+           .CreateLogger();
+            builder.Host.UseSerilog();
+
 
             // Add services to the container.
             builder.Services
-                .AddDataLayer()
+                .AddDataLayer(builder.Configuration)
                 .AddBusinessLogicLayer();
+
+            builder.Services.AddMapster();
 
             builder.Services.AddControllers();
          

@@ -10,9 +10,11 @@ namespace CarService3.Host.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
-        public CustomerController(ICustomerService customerService)
+        private readonly ILogger<CustomerController> _logger;
+        public CustomerController(ICustomerService customerService, ILogger<CustomerController> logger)
         {
             _customerService = customerService;
+            _logger = logger;
         }
 
         [HttpGet(nameof(GetAllCustomers))]
